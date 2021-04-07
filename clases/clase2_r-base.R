@@ -5,9 +5,9 @@
 # 2.1. Directorio de trabajo
 # 2.2. R como calculadora
 # 2.3. Objetos 
-# 2.4. Tipos de datos (numericos, caracter, factor, l??gico),
+# 2.4. Tipos de datos (numericos, caracter, factor, logico),
 # 2.5. Estructura de datos (vectores, matrices, data frames, listas y arrays), 
-# 2.6  Funciones.
+# 2.6. indices, filtros, seleccionar
  
 
 #### 2.1. Directorio de trabajo 
@@ -161,4 +161,71 @@ lista
 length(lista)
 dim(lista)
 
+#### 2.6. indices, filtros, seleccionar
+##indexacion: identificacion de los elementos de objeto por medio de numero
+# vector
+x <-  c(3, 5, 9, 13, "A", F, "C")
+length(x)
+x[1]
+x[3:7]
+# lista
+lista <- list("A", c(2,4,5,4), matrix(1:12, ncol = 3, nrow = 4), FALSE)
+length(lista)
+lista[[1]]
+lista[[4]]
+# data.frame
+library(MASS)
+data("crabs") # cangrejos
+## inspeccionar primero
+class(crabs)
+dim(crabs)
+nrow(crabs)
+ncol(crabs)
+str(crabs)
 
+head(crabs)# primeras 6 filas
+tail(crabs)# ultimas 6 filas
+colnames(crabs)# nombre de las columnas 
+
+# seleccionar
+## [] o $
+crabs[,2]# seleciono columna 2
+crabs[,"sex"] # lo mismo pero por el nombre
+crabs$sex #columna 2 
+
+crabs[1,]# selecciono fila 1
+crabs[4,5] # elemento de la fila 4 columna 5
+
+crabs[1:10, c("FL","CW")] # filas 1 al 10, variables "FL y "CW"
+
+
+## Filtrar con algunos operadores logicos
+
+crabs[crabs$sp == "B",] # Solo las filas solo los cangrejos azules
+
+crabs[crabs$sp == "B", c("RW", "FL")]
+
+# ejemplo 
+crabs$FL > 10 # operacion logica
+crabs[crabs$FL > 10,]# operacion aplicada a un filtro
+# Ejercicio
+# Seleccione las hembras de la variedad Azul con CL entre 35 y 40 mm
+crabs$sex == "H" & crabs$sp == "B"
+crabs$sp == "B" # sp azul 
+crabs$sex == "F"# sexo hembra
+
+crabs$sex == "F" & crabs$sp == "B" # hembras de la variedad azul
+
+crabs$CL >= 35 # CL mayor o igual a 35
+
+crabs$CL <=40 # CL menor o igual a 40
+
+crabs$CL >= 35 & crabs$CL <=40 # CL entre 35 y 40
+
+crabs[(crabs$sex == "F" & crabs$sp == "B" & crabs$CL >= 35 & crabs$CL), ] # expresion completa
+
+# o en dos pasos
+#Paso 1. hembras de variedad azul
+azul_hembra <- crabs[crabs$sex == "F" & crabs$sp == "B",]
+# Paso 2. con el rango CL entre 35 y 40
+azul_hembra[(azul_hembra$CL <=40 & azul_hembra$CL >= 35),]
