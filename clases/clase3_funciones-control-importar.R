@@ -1,5 +1,15 @@
-# Funciones. Una introduccion basica
+############-----------CLASE 3. Funciones, control, importar - exportar----------############
 
+# CONTENIDO: 
+# 3.1. Funciones
+# 3.2. Estructuras de control condicionales (if, else, ifelse)
+# 3.3. Estructuras de control iterativas o bucles (for, while)
+# 3.4. Estructura de control clausula(break, next)  
+# 3.5. Importar y exportar datos con r-base
+
+
+#### 3.1. Funciones . Una introduccion basica
+# estructura
 nombre <- function(argumentos){
   cuerpo
 }
@@ -15,9 +25,9 @@ area_cuad <- function(lado1, lado2){
 }
 
 # Estructura de control
-## condicionales
+#### 3.2. Estructuras de control condicionales (if, else, ifelse)
 #=========== condicional if =========
-# sintaxis
+# estructura
 
 if(Condicion) {
   operaciones_si_es_TRUE
@@ -36,7 +46,7 @@ if (4 < 3){
 }
 
 #=========== condicional if con un else =========
-## sintaxis
+## estructura
 if(condici??n) {
   operaciones_si_la_condici??n_es_TRUE
 } else {
@@ -71,9 +81,9 @@ if (1:10 < 3){
 ifelse(1:10 < 3, "verdadero", "falso")
 
 
-## iterativas o bucles(for, while)
+#### 3.3. Estructuras de control iterativas o bucles (for, while)
 #=========== for ==============
-# sintaxis
+# estructura
 for(elemento in objeto) {
   operacion_con_elemento
 }
@@ -104,7 +114,7 @@ vector
 
 
 #=========== while ==============
-#sintaxis
+#estructura
 while(condicion) {
   operaciones
 }
@@ -131,7 +141,7 @@ while (condicion < 10) {
   print("condicion es menor a 10")
 }
 
-
+#### 3.4. Estructura de control clausula (break, next)
 #=========== break y next ==============
 #=== break
 # ejemplo 1
@@ -164,7 +174,7 @@ for(i in 1:4) {
 }
 
 #=========== repeat ==============
-# sintaxis
+# estructura
 repeat {
   operaciones
   
@@ -180,3 +190,6 @@ repeat{
     break
   }
 }
+
+#### 3.5. Importar y exportar datos con r-base
+
