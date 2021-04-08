@@ -193,3 +193,50 @@ repeat{
 
 #### 3.5. Importar y exportar datos con r-base
 
+# bajar datos de internet
+
+download.file(url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data", destfile = "iris.data" )
+
+# read.table
+### Argumentos
+# file: la ruta del archivo en el directorio
+# header: si el archivo tiene encabezados
+# sep: caracter usado como separador
+# col.names
+# stringAsFactors: convierte los textos a factores
+
+data <- read.table("iris.data", sep = ",")
+data
+
+# agregar encabezados
+nombres <- c("LP","AP","LT","DT","specie")
+data <- read.table("iris.data", sep = ",", col.names = nombres)
+
+head(data)
+## la opcion de file.choose()
+# read.csv
+
+df_cancer <- read.table(file = "breast-cancer-wisconsin.csv", header = FALSE, sep = ",")
+
+df_cancer <- read.csv("breast-cancer-wisconsin.csv")
+
+
+## Exportar
+
+# write.table( )
+# Argumentos:
+## x: nombre del data.frame o matriz que se va a exportar
+## file: nombre, extension o ruta del archivo que estamos creando
+## sep: separador de columnas
+## col.names: incluir (True) o no (False) los nombres de las columnas
+
+write.table(data, "iris_exportado.txt", sep = "\t", row.names= FALSE, col.names = TRUE)
+
+data_import <- read.table("iris_exportado.txt", sep = "\t", header = T)
+
+
+# write.csv()
+# mismos argumentos que write.table
+
+write.table(data, "iris_exportado.csv", sep = ",", row.names= FALSE, col.names = TRUE)
+
