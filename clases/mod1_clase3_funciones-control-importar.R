@@ -4,7 +4,7 @@
 # 3.1. Funciones
 # 3.2. Estructuras de control condicionales (if, else, ifelse)
 # 3.3. Estructuras de control iterativas o bucles (for, while)
-# 3.4. Estructura de control clausula(break, next)  
+# 3.4. Estructura de control clausula (break, next)  
 # 3.5. Importar y exportar datos con r-base
 
 
