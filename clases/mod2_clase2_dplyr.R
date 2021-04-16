@@ -151,3 +151,29 @@ summarise(vuelos_mes, atraso_mensual_promedio = mean(atraso_salida, na.rm= TRUE)
 
 vuelos %>% group_by(mes) %>% 
   summarise(atraso_mensual_promedio = mean(atraso_salida, na.rm= TRUE) )
+
+
+# otro ejemplo con pipe
+# Imagina que queremos explorar la relaci??n entre la distancia y 
+# el atraso promedio para cada ubicacion
+por_destino <- group_by(vuelos, destino)
+atraso <- summarise(por_destino,
+                    conteo = n(),
+                    distancia = mean(distancia, na.rm = TRUE),
+                    atraso = mean(atraso_llegada, na.rm = TRUE)
+)
+atraso <- filter(atraso, conteo > 20, destino != "HNL")
+# tres pasos para el ejemplo anterior
+# 1. Agrupar vuelos por destino
+# 2. Resumir para calcular la distancia, la demora promedio y el n??mero de vuelos en cada grupo.
+# 3. Filtrar para eliminar puntos ruidosos y el aeropuerto de Honolulu
+
+
+atrasos <- vuelos %>% 
+  group_by(destino) %>% 
+  summarise(
+    conteo = n(),
+    distancia = mean(distancia, na.rm = TRUE),
+    atraso = mean(atraso_llegada, na.rm = TRUE)
+  ) %>% 
+  filter(conteo > 20, destino != "HNL")
