@@ -5,11 +5,11 @@
 # 2.3. Select
 # 2.4. Filter
 # 2.5. Operadores logicos y booleanos
-# 2.6.  Pipes
-# 2.7. arrange()
+# 2.6. arrange() 
+# 2.7. rename()
 # 2.8. mutate()
-# 2.9. Agrupar  con summarize(); group_by(); count()
-
+# 2.9. Agrupar  con summarize(); group_by(); count() 
+# 2.10. Pipes %>%
 #### 2.1. Gramatica de dplyr.
 select() # seleccionar columnas
 filter() # seleccionar filas
@@ -108,16 +108,46 @@ filter(vuelos, !(atraso_salida > 120 | atraso_llegada > 120))
   # 3. Fueron operados por United, American o Delta
   # 4. Partieron en invierno del hemisferio sur (julio, agosto y septiembre)
 
-#### 2.6. Pipes
 
-
-#### 2.7. arrange()
+#### 2.6. arrange(). Reordenar filas
  # ejemplos de de https://es.r4ds.hadley.nz/transform.html
 
+arrange(vuelos, anio, mes, dia) 
+arrange(vuelos, desc(mes)) # desc( ) para ordenar una columna en orden descendente.
+
+#### 2.7. rename ( ). renombrar las variables 
+# COMENTARIO: con select( ) tambien se puede renombrar, pero en ese caso elimina las variables no selecionadas
+
+vuelos_renamed <- rename(vuelos, h_sal = horario_salida, s_p = salida_programada, a_s = atraso_salida)
+names(vuelos)
+names(vuelos_renamed)
 
 #### 2.8. mutate()
-# ejemplos de de https://es.r4ds.hadley.nz/transform.html
 
-#### 2.9. Agrupar  con summarize(); group_by(); count()
+vuelos_duracion <- mutate(vuelos, duracion_vuelo = horario_llegada - horario_salida)
 
-# ejemplos de de https://es.r4ds.hadley.nz/transform.html
+# otro ejemplo con mutate
+vuelos_sml <- select(vuelos, 
+                     anio:dia, 
+                     starts_with("atraso"),
+                     distancia, 
+                     tiempo_vuelo)
+
+vuelos_sml <- mutate(vuelos_sml,
+       ganancia = atraso_salida - atraso_llegada,
+       velocidad = distancia / tiempo_vuelo * 60)
+
+#COIENTARIO: usar transmutate( ) si solo queres conservar las nuevas variables
+
+#### 2.8. Agrupar  con summarize(); group_by(); count()
+
+vuelos_mes <- group_by(vuelos, mes)
+
+summarise(vuelos_mes, atraso_mensual_promedio = mean(atraso_salida, na.rm= TRUE) )
+
+# COMENTARIO: Explicar con ejemplos los NA
+
+#### 2.9. Pipes %>% 
+
+vuelos %>% group_by(mes) %>% 
+  summarise(atraso_mensual_promedio = mean(atraso_salida, na.rm= TRUE) )
