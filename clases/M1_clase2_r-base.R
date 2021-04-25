@@ -95,11 +95,11 @@ levels(sexo_fac) # vemos las categorias
 a <- 2
 b <- 4
 
-a == b # ??a es igual a b?
-a > b # ??a es amyor a b?
-a != b # ?? es distinto de b?
-(a < 3) & (b < 5)  # ??es a menor que 3 y b menor que 3?
-(a < 1) | (b < 3)  # ??es a menor que 1 o b menor que 3?
+a == b # a es igual a b?
+a > b # a es mayor a b?
+a != b # a es distinto de b?
+(a < 3) & (b < 5)  # a es a menor que 3 y b menor que 3?
+(a < 1) | (b < 3)  # a es a menor que 1 o b menor que 3?
 
 #### 2.5. Estructura de datos (vectores, matrices, data frames, listas y arrays), 
 # Vectores
