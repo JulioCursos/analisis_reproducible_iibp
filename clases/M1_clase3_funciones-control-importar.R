@@ -29,7 +29,7 @@ area_cuad <- function(lado1, lado2){
 #=========== condicional if =========
 # estructura
 
-if(Condicion) {
+if (Condicion) {
   operaciones_si_es_TRUE
 }
 
@@ -47,21 +47,21 @@ if (4 < 3){
 
 #=========== condicional if con un else =========
 ## estructura
-if(condici??n) {
+if (condici??n) {
   operaciones_si_la_condici??n_es_TRUE
 } else {
   operaciones_si_la_condici??n_es_FALSE
 }
 ## ejemplo con if mas else
 # Se cumple la condicion y se muestra "Verdadero"
-if(4 > 3) {
+if (4 > 3) {
   "Verdadero"
 } else {
   "Falso"
 }
 
 # No se cumple la condicion y muestra "falso"
-if(4 < 3) {
+if (4 < 3) {
   "Verdadero"
 } else {
   "Falso"
@@ -78,13 +78,13 @@ if (1:10 < 3){
   print("verdadero")
 }
 #
-ifelse(1:10 < 3, "verdadero", "falso")
+ifelse (1:10 < 3, "verdadero", "falso")
 
 
 #### 3.3. Estructuras de control iterativas o bucles (for, while)
 #=========== for ==============
 # estructura
-for(elemento in objeto) {
+for (elemento in objeto) {
   operacion_con_elemento
 }
 # para cada elemento del objeto realiza la siguiente operacion
@@ -98,7 +98,7 @@ for (cara in dado){
 
 dado <- 1:6
 for (cara in dado){
-  print(cara ^2)
+  print (cara ^2)
 }
 
 
@@ -106,7 +106,7 @@ for (cara in dado){
 
 vector <- NULL
 
-for(cara in dado) {
+for (cara in dado) {
   vector[cara] <- cara ^ 2
 }
 
@@ -115,14 +115,14 @@ vector
 
 #=========== while ==============
 #estructura
-while(condicion) {
+while (condicion) {
   operaciones
 }
 # mientras la condicion sea verdadera realiza la operacion
 
 tope <- 5
 valor <- 0
-while(valor < tope){
+while (valor < tope){
   print("No llega al tope")
   valor <- valor + 1
 }
@@ -184,9 +184,10 @@ repeat {
 
 valor <-  0
 
-repeat{
+
+repeat {
   valor <- valor + 1
-  if(valor == 5) {
+  if (valor == 5) {
     break
   }
 }
