@@ -1,5 +1,6 @@
 
 ############-----------CLASE 2. R-BASE----------############
+# lou #
 
 # CONTENIDO: 
 # 2.1. Directorio de trabajo
