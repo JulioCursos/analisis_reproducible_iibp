@@ -24,6 +24,7 @@ area_cuad <- function(lado1, lado2){
   lado1*lado2
 }
 
+
 # Estructura de control
 #### 3.2. Estructuras de control condicionales (if, else, ifelse)
 #=========== condicional if =========
@@ -44,13 +45,21 @@ if (4 > 3){
 if (4 < 3){
   print("verdadero")
 }
+# otro ejemplo
+x <- -4
+
+if (x < 0) {
+  print("x es negativo") # si es TRUE
+  
+}
+x <- 4 # Si es FALSE no pasa nada
 
 #=========== condicional if con un else =========
 ## estructura
-if (condici??n) {
-  operaciones_si_la_condici??n_es_TRUE
+if (condicion) {
+  operaciones_si_la_condicion_es_TRUE
 } else {
-  operaciones_si_la_condici??n_es_FALSE
+  operaciones_si_la_condicion_es_FALSE
 }
 ## ejemplo con if mas else
 # Se cumple la condicion y se muestra "Verdadero"
@@ -66,6 +75,18 @@ if (4 < 3) {
 } else {
   "Falso"
 }
+# otro ejemplo 
+x <- -4
+
+if (x < 0) {
+  print("x es negativo") 
+} else{
+  print(" x es positivo o cero")
+}
+x <- 4 # probar con positivo
+x <- 0 # probar con cero
+
+
 
 #=========== condicional ifelse =========
 ## permite vectorizar if, else
@@ -91,11 +112,11 @@ for (elemento in objeto) {
 
 dado <- 1:6
 for (cara in dado){
-  dado + 1
+  cara + 1
 } # Para devolver los resultados R necesita agregar print( ). En otros lenguajes 
 # se utiliza return()
 
-
+# calcular el cuadrado de cada cara
 dado <- 1:6
 for (cara in dado){
   print (cara ^2)
@@ -104,7 +125,7 @@ for (cara in dado){
 
 # asignar los resultados a un objeto
 
-vector <- NULL
+vector <- numeric() # o NULL
 
 for (cara in dado) {
   vector[cara] <- cara ^ 2
@@ -112,9 +133,17 @@ for (cara in dado) {
 
 vector
 
+# otro ejemplo
+# calcular el cuadrado de cada numero del 1 al 10
+for (i in 1:10) {
+  x2 <- i^2
+  print(x2)
+}
+
+
 
 #=========== while ==============
-#estructura
+# estructura
 while (condicion) {
   operaciones
 }
@@ -163,6 +192,8 @@ while(numero > 5){
   numero <- numero - 1
   message ("el numero es:", numero)
 }
+####################### Hasta aca condicionales. Ver si hace falta los 2 siguientes
+
 
 #=== next
 
