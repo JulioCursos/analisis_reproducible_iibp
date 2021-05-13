@@ -101,14 +101,21 @@ library(readr)
 
 iris_readr <- read_csv("./datos/iris_exportado.csv") # opciones por defecto
 
+crabs_readr <- read_csv("./datos/crabs.csv")
+
 # opciones para cambiar los tipos de variables
-iris_readr_otro_ejemplo <- read_csv("iris_exportado.csv", col_types = cols(
+iris_readr_mod <- read_csv("./datos/iris_exportado.csv", col_types = cols(
   Sepal.Length = col_double(),
   Sepal.Width = col_double(),
   Petal.Length = col_double(),
   Petal.Width = col_double(),
   Species = col_factor(c("setosa", "versicolor", "virginica")) # si necesitamos que estos nombres sean factores
 ))
+# inspeccionar archivo
+
+str(iris_readr)
+glimpse(iris_readr)
+
 
 # Escribir un archivo con readr
 # write_csv
