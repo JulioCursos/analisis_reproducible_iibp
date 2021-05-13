@@ -14,9 +14,8 @@
 select() # seleccionar columnas
 filter() # seleccionar filas
 %>% # operador pipe para unir operaciones
-        mutate() # crear nuevas variables
+mutate() # crear nuevas variables
 summarize(); group_by(); count() # opciones para agrupar
-join_left(); join_right() # unir tablas basado en una variable en comun
 arrange() # ordenar una columna
 rename() # renombrar encabezados de columnas
 
@@ -36,12 +35,12 @@ rename() # renombrar encabezados de columnas
 # Cargar librerias
 # install.packages("tidyverse") 
 library(tidyverse)
-# cargar datos
+# Bajar datos
 
-download.file("http://bit.ly/MS_trafficstops_bw_age",
-              "datos/MS_trafficstops_bw_age.csv")
+#download.file("http://bit.ly/MS_trafficstops_bw_age",
+#              "./datos/MS_trafficstops_bw_age.csv")
 
-stops <- read_csv("datos/MS_trafficstops_bw_age.csv")
+stops <- read_csv("./datos/MS_trafficstops_bw_age.csv")
 names(stops)
 # algunos operaciones con select()
 select(stops, id, police_department, officer_id, driver_age)# selecciono por nombres
@@ -54,6 +53,9 @@ i <- match("id", names(stops))
 j <- match("stop_date", names(stops))
 
 head(stops[, -(i:j)]) # con r-base
+
+head(stops[,-(1:2)])# r-base mas sencillo
+
 # algunas funciones especiales que funcionan dentro de select()
 # starts_with(), ends_with(), contains()
 
@@ -92,7 +94,13 @@ head(output)
 
 # Ver mas ejemplos y ejercicios con el paquete (datos)
 library(datos)
+data(package= "datos")
+
 vuelos # dataset dentro de datos
+# inspeccionar
+class(vuelos)
+glimpse(vuelos)
+
 # ejercio 1. Vuelos que partieron en noviembre y diciembre
 filter(vuelos, mes == 11 | mes == 12)
 filter(vuelos, mes %in% c(11, 12))
@@ -103,8 +111,8 @@ filter(vuelos, !(atraso_salida > 120 | atraso_llegada > 120))
 
 
 # Algunos ejercicios de https://es.r4ds.hadley.nz/transform.html
-  # 1. Tuvieron un retraso de llegada de dos o m??s horas
-  # 2. Volaron a Houston (IAH oHOU)
+  # 1. Tuvieron un retraso de llegada de dos o mas horas
+  # 2. Volaron a Houston (IAH o HOU)
   # 3. Fueron operados por United, American o Delta
   # 4. Partieron en invierno del hemisferio sur (julio, agosto y septiembre)
 
@@ -116,15 +124,20 @@ arrange(vuelos, anio, mes, dia)
 arrange(vuelos, desc(mes)) # desc( ) para ordenar una columna en orden descendente.
 
 #### 2.7. rename ( ). renombrar las variables 
+
+vuelos_renamed <- rename(vuelos, h_sal = horario_salida, 
+                         s_p = salida_programada, 
+                         a_s = atraso_salida)
+names(vuelos) # antes de renombrar
+names(vuelos_renamed) # despues de renombrar
+
 # COMENTARIO: con select( ) tambien se puede renombrar, pero en ese caso elimina las variables no selecionadas
 
-vuelos_renamed <- rename(vuelos, h_sal = horario_salida, s_p = salida_programada, a_s = atraso_salida)
-names(vuelos)
-names(vuelos_renamed)
-
 #### 2.8. mutate()
+# crear una variable nueva. Se pueden hacer operaciones
 
-vuelos_duracion <- mutate(vuelos, duracion_vuelo = horario_llegada - horario_salida)
+vuelos_duracion <- mutate(vuelos, 
+                          duracion_vuelo = horario_llegada - horario_salida)
 
 # otro ejemplo con mutate
 vuelos_sml <- select(vuelos, 
@@ -137,12 +150,12 @@ vuelos_sml <- mutate(vuelos_sml,
        ganancia = atraso_salida - atraso_llegada,
        velocidad = distancia / tiempo_vuelo * 60)
 
-#COIENTARIO: usar transmutate( ) si solo queres conservar las nuevas variables
+#COMENTARIO: usar transmutate( ) si solo queres conservar las nuevas variables
 
 #### 2.8. Agrupar  con summarize(); group_by(); count()
-
+# group_by(): agrupa o colapsa en una fila
+# summarise(): se usa con agrupar. Se usa para resumir operaciones
 vuelos_mes <- group_by(vuelos, mes)
-
 summarise(vuelos_mes, atraso_mensual_promedio = mean(atraso_salida, na.rm= TRUE) )
 
 # COMENTARIO: Explicar con ejemplos los NA
@@ -153,8 +166,14 @@ vuelos %>% group_by(mes) %>%
   summarise(atraso_mensual_promedio = mean(atraso_salida, na.rm= TRUE) )
 
 
+
 # otro ejemplo con pipe
-# Imagina que queremos explorar la relaci??n entre la distancia y 
+stops %>% 
+  group_by(driver_race) %>% 
+  summarize(mean_age = mean(driver_age, na.rm= TRUE))
+
+
+# Imagina que queremos explorar la relacion entre la distancia y 
 # el atraso promedio para cada ubicacion
 por_destino <- group_by(vuelos, destino)
 atraso <- summarise(por_destino,
