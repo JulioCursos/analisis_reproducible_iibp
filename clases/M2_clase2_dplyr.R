@@ -172,6 +172,13 @@ stops %>%
   group_by(driver_race) %>% 
   summarize(mean_age = mean(driver_age, na.rm= TRUE))
 
+stops %>% 
+  filter(!is.na(driver_race)) %>% # excluyendo los NA de driver_race
+  group_by(driver_race) %>% 
+  summarize(mean_age = mean(driver_age, na.rm= TRUE))
+
+
+
 
 # Imagina que queremos explorar la relacion entre la distancia y 
 # el atraso promedio para cada ubicacion
@@ -198,6 +205,36 @@ atrasos <- vuelos %>%
   filter(conteo > 20, destino != "HNL")
 
 
+
+
+# Ejemplos para entender mejor group_by y summarize
+# group_by() : 
+stops %>% 
+  group_by(driver_race) %>%
+  summarise(n= n()) # cantidad de conductores por raza
+  
+stops %>% 
+  count(violation) # contar las observaciones por grupo
+
+stops %>% 
+  count(violation, name = "n_infracciones")# si queremos poner un nombre
+
+
+# Numero de mujeres por infraccion
+
+stops %>% 
+  filter(driver_gender== "female") %>% 
+  group_by(violation) %>% 
+  summarise(n_infracciones_mujeres = n())
+
+# Numero de mujeres por infraccion
+stops %>% 
+  filter(driver_gender== "female" & driver_race == "White") %>% 
+  group_by(violation) %>% 
+  summarise(n_infracciones = n())
+
+
+
 # tratamientos de valones faltantes o no disponibles NA (non available)
 # Pregunta: Por que es los NA complican?
 # Respuesta: Porque los NA son contagiosos. Cualquier operacion con un valor desconocido
@@ -214,13 +251,13 @@ NA > 5
 
 # Aplicacion
 
-# Sea x la edad de Mar??a. No sabemos qu?? edad tiene.
+# Sea x la edad de Maria. No sabemos que edad tiene.
 x <- NA
 
-# Sea y la edad de Juan. No sabemos qu?? edad tiene.
+# Sea y la edad de Juan. No sabemos que edad tiene.
 y <- NA
 
-# ??Tienen Juan y Mar??a la misma edad?
+# ??Tienen Juan y Maria la misma edad?
 x == y
 
 # ??No sabemos!
