@@ -196,3 +196,61 @@ atrasos <- vuelos %>%
     atraso = mean(atraso_llegada, na.rm = TRUE)
   ) %>% 
   filter(conteo > 20, destino != "HNL")
+
+
+# tratamientos de valones faltantes o no disponibles NA (non available)
+# Pregunta: Por que es los NA complican?
+# Respuesta: Porque los NA son contagiosos. Cualquier operacion con un valor desconocido
+# dara como resultado un valor desconocido
+
+NA + 10
+
+NA / 2
+
+
+NA > 5
+
+10 == NA
+
+# Aplicacion
+
+# Sea x la edad de Mar??a. No sabemos qu?? edad tiene.
+x <- NA
+
+# Sea y la edad de Juan. No sabemos qu?? edad tiene.
+y <- NA
+
+# ??Tienen Juan y Mar??a la misma edad?
+x == y
+
+# ??No sabemos!
+
+
+
+# ejemplo con archivo importado tipo excel
+library(readxl)
+data <- read_excel("./datos/datasets_NA.xlsx") 
+
+View(data) # R transforma en NA todas las celdas vacias
+# ver si hay los valores faltantes
+is.na(data) # operacion logica
+data %>% filter(is.na(Sepal.Length))# aplicado a un filtro
+          # !is.na(Sepal.Length) todos los que no sean datos faltantes
+# eliminar valores faltantes
+library(tidyr)
+data_sin_na <- drop_na(data)# elimina las filas con valores faltantes
+
+
+# Pero a veces se llenan manualmente con 0 o guiones "-"
+
+# na_if()
+data <- na_if(data, "-") 
+data <- na_if(data, 0)
+
+# guardar ese archivo
+library(openxlsx)
+
+openxlsx::write.xlsx(data, file = ".datos/datasets_NA.xlsx") # con esta libreria no hay problemas
+write.csv(data, "./datos/datasets_NA.csv", row.names = FALSE)# exporta llenando con NA
+# completar con na = "" si queres que quede las celdas vacias
+
