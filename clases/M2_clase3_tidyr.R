@@ -77,7 +77,6 @@ stops %>%
 
 # tidyr: ayuda a cambiar el formato de las tablas
 
-
 ## Formato "largo": 
 # cada columna una variable
 # cada fila una observacion
@@ -86,6 +85,8 @@ stops %>%
 # cada fila es un tema
 
 # pivot_wider( ): Formato largo a formato ancho
+# Incrementa el numero de columnas y reduce el nro de filas
+
 ## argumentos (ver en help)
 # data
 # names_from
@@ -113,6 +114,10 @@ violations_wide
 
 
 # pivot_longer( )
+
+# Incrementa el numero de filas y reduce el nro de columnas
+
+
 ## argumentos
 # datos
 # cols: columnas que se van a cambiar al formato largo
@@ -138,7 +143,7 @@ df_world <- read.csv("https://raw.githubusercontent.com/RamiKrispin/coronavirus/
 
 write.csv(df_world, "./datos/coronavirus_12_05_2021.csv", row.names = FALSE)
 
-
+df_world <- read.csv("./datos/coronavirus_12_05_2021.csv")
 # casos en paraguay
 # formato long
 df_paraguay <- df_world %>% filter(country== "Paraguay") %>% 
@@ -147,10 +152,18 @@ df_paraguay <- df_world %>% filter(country== "Paraguay") %>%
   
 df_paraguay
 # formato wide
-df_paraguay <- df_world %>% filter(country== "Paraguay") %>% 
+df_paraguay_wide <- df_world %>% filter(country== "Paraguay") %>% 
   group_by(country, type) %>% 
   summarise(total= sum(cases)) %>% 
   pivot_wider(
     names_from = type,
     values_from = total)
-df_paraguay
+df_paraguay_wide
+
+
+# formato longer
+df_paraguay_long <- df_paraguay_wide %>%
+  pivot_longer(cols = -country,
+               names_to = "type",
+               values_to = "total")
+df_paraguay_long  
