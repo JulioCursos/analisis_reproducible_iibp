@@ -17,7 +17,7 @@ ggplot(iris, aes(x = Petal.Length, y = Petal.Width)) +
   geom_point() +
   geom_smooth(method = "lm")
 
-# 3. adjustar los l??mites x e y
+# 3. adjustar los limites x e y
 
 # metodo 1. borrando los puntos fuera de los limites
 
@@ -81,7 +81,11 @@ gg <- ggplot(midwest, aes(x=area, y=poptotal)) +
   geom_smooth(method="lm", col="firebrick", size= 2) + # setea grosor y color de la linea
   coord_cartesian(xlim=c(0, 0.1), ylim=c(0, 1000000)) + 
   labs(title="Area Vs Population", subtitle="From midwest dataset", y="Population", x="Area", caption="Midwest Demographics")
+gg
+?ggsave
 
+ggsave("./outputs/midwest.pdf")
+ggsave("./outputs/midwest.png", width = 10, height = 7, dpi = 300)
 # Si queres sacar la leyenda
 
 gg + theme(legend.position = "none")
