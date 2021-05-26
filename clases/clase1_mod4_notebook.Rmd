@@ -1,0 +1,135 @@
+---
+title: "Clase 1. Modulo 4"
+output: html_notebook
+---
+
+
+Formato de texto
+------------------------------------------------------------
+
+*cursiva*   o _cursiva_
+
+**negrita**   __negrita__
+
+`code`
+
+super indice^2^ y sub indice~2~
+
+
+Encabezados
+------------------------------------------------------------
+
+# Encabezado de primer nivel
+
+## Encabezado de segundo nivel
+
+### Encabezado de tercer nivel
+
+Listas
+------------------------------------------------------------
+
+*   Elemento 1 en lista no enumerada
+
+*   Elemento 2
+
+    * Elemento 2a
+
+    * Elemento 2b
+
+1.  Elemento 1 en lista enumerada
+
+1.  Elemento 2. La numeraci??n se incrementa autom??ticamente en el output.
+
+
+
+Enlaces e imagenes
+------------------------------------------------------------
+Enlace:
+<https://sites.google.com/view/iibp/actividades/cursos>
+
+Enlace con texto
+
+[Info sobre el curso](https://sites.google.com/view/iibp/actividades/cursos)
+
+Logo IIBP
+
+![Logo IIBP](/home/julio/Documentos/CURSOS/analisis_reproducible_iibp/imagenes/iibp_logo_sin_fondo.png)
+
+
+Bloques de codigo
+-----------------------------------------------------------------
+* Insertar un bloque: Ctrl + Alt + I
+* Ejecutar el bloque: Ctrol + Shift + Enter
+
+### Nombre de los bloques. Ventajas:
+ 1. Podes navegar entre bloques especificos
+ 2. Nombres son utiles para usar en otras partes
+ 
+### Opciones de los bloques
+* eval= FALSE: evita que el codigo sea evaluado
+```{r, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+iris %>%  ggplot( aes(Petal.Length, Petal.Width)) +
+  geom_point()
+
+```
+
+* include = FALSE  : ejecuta el codigo, pero no lo muestra en el reporte
+```{r, include=FALSE}
+library(ggplot2)
+library(dplyr)
+iris %>%  ggplot( aes(Petal.Length, Petal.Width)) +
+  geom_point()
+
+```
+
+* echo = FALSE  : evita que se veo el codigo, pero si muestra los resultados
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(dplyr)
+iris %>%  ggplot( aes(Petal.Length, Petal.Width)) +
+  geom_point()
+
+```
+* message = FALSE o warning = FALSE : evita que aparezcan mensajes en el reporte
+
+* results = 'hide' : oculta el output impreso
+
+* fig.show = 'hide' : oculta los graficos
+
+## tablas
+Por defecto rmarkdown imprime las tablas como se ve en la consola
+
+```{r}
+mtcars[1:5,]
+```
+
+Pero tambien se puede dar otros formatos:
+
+```{r}
+knitr::kable(head(iris), format = "html",
+             caption = "tabla iris formato html")
+```
+Formato de salida
+-----------------------------------------------------------------
+### Dos maneras de definir el formato de salida
+1. Permanente, modificando el encabezado YAML
+``` {.yaml}
+    title: "Viridis Demo"
+    output: html_document
+```
+2. Transitorio llamando rmarkdown::render()
+```{r eval = FALSE}
+    rmarkdown::render("diamond-sizes.Rmd", output_format = "word_document")
+```
+## Documentos de salida
+
+- `word_document` para un documento Microsoft Word  (`.docx`).
+
+- `odt_document` para un open document de Libre Office(`.odt`).
+
+- `md_document` para un documento Markdown.
+
+- `github_document`  version de md_document disenada para compartir en github

@@ -8,6 +8,7 @@ library(plotly)
 # 3.3. Graficos de densidad
 # 3.4. Graficos de dispersion
 # 3.5. Boxplots
+
 #### 3.1. Graficos de barras
 # Problema: necesito plotear variables numericas (y) para diferentes categorias (x)
 # Importante: la altura puede ser el conteo de casos
