@@ -68,7 +68,6 @@ if (4 > 3) {
 } else {
   "Falso"
 }
-
 # No se cumple la condicion y muestra "falso"
 if (4 < 3) {
   "Verdadero"
@@ -271,4 +270,7 @@ data_import <- read.table("iris_exportado.txt", sep = "\t", header = T)
 # mismos argumentos que write.table
 
 write.table(data, "iris_exportado.csv", sep = ",", row.names= FALSE, col.names = TRUE)
+
+# agregar tambien ejemplos apply
+
 
